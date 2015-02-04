@@ -1,7 +1,11 @@
 require_relative 'bike_container'
 
-class DockingStation
+class Garage
 
   include BikeContainer
+
+  def fix(bike)
+    bike.fix!
+  end
 
 end
