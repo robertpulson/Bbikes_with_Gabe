@@ -28,13 +28,20 @@ describe DockingStation do
   it "should not accept a bike when it's full" do
     tiny_station = DockingStation.new(capacity: 1)
     tiny_station.dock(bike)
-    expect{ tiny_station.dock(bike_two) }.to raise_error(RuntimeError, 'Station is full')
+    expect{ tiny_station.dock(bike_two) }.to raise_error('Station is full')
   end
 
   it "should provide the list of available bikes" do
     station.dock(bike)
     station.dock(broken_bike)
     expect(station.available_bikes).to eq([bike])
+  end
+
+  it "should not accept a bike when it's full (capacity 20)" do
+    station20 = DockingStation.new(capacity: 20)
+    20.times {station20.dock(bike)}
+    expect(station20).to be_full
+    expect{ station20.dock(bike) }.to raise_error("Station is full")
   end
 
 end
