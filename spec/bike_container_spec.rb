@@ -36,4 +36,10 @@ describe BikeContainer  do
     expect(holder.available_bikes).to eq [bike]
   end
 
+  it "should provide a list of broken bikes" do
+    holder.dock(bike)
+    holder.dock(broken_bike)
+    expect(holder.broken_bikes).to eq [broken_bike]
+  end 
+
 end
