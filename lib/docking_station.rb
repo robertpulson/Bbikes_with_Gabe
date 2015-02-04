@@ -9,4 +9,3 @@ class DockingStation
   end
 
 end
-
