@@ -4,7 +4,7 @@ class ContainerHolder; include BikeContainer; end
 
 describe BikeContainer  do 
 
-  let(:bike)          { double :bike,         broken?: false   }
+  let(:bike)          { double :bike,         broken?: false, class: "Bike"   }
   let(:broken_bike)   { double :broken_bike, :broken? => true  }
   let(:holder)        { ContainerHolder.new }
 
@@ -40,6 +40,14 @@ describe BikeContainer  do
     holder.dock(bike)
     holder.dock(broken_bike)
     expect(holder.broken_bikes).to eq [broken_bike]
-  end 
+  end
 
+  it "should return an error if attempting to release a bike it does not contain" do 
+    expect { holder.release(bike) }.to raise_error ("#{bike} does not exist!")
+  end
+
+  it "should return an error if attempting to release something that isnt a bike" do
+    not_a_bike = 1
+    expect { holder.release(not_a_bike) }.to raise_error ("#{not_a_bike} is not a bike!")
+  end 
 end

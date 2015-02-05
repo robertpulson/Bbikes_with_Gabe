@@ -28,6 +28,8 @@ module BikeContainer
   end
 
   def release(bike)
+    raise "#{bike} is not a bike!" if bike.class.to_s != "Bike"
+    raise "#{bike} does not exist!" if bikes.include?(bike) == false
     bikes.delete(bike)
   end
 

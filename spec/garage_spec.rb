@@ -4,11 +4,11 @@ require 'garage'
 
 describe Garage do
 
-let (:broken_bike) {double :bike, broken?: true}
+let (:broken_bike) { double :bike, broken?: true, fix!: false } 
+let (:van)         { double :van, bikes: [broken_bike] }
 let (:garage) {Garage.new}
 
   it 'should be able to fix a broken bike' do
-    
     garage.dock(broken_bike)
     expect(broken_bike).to receive(:fix!)         # Don't fully understand order of expect
     garage.fix(broken_bike)
@@ -20,12 +20,10 @@ let (:garage) {Garage.new}
   end
   
   it 'should fix the bikes as they arrive' do
-    garage.accept(broken_bike)
+    expect(van).to receive(:release).with(broken_bike)
     expect(broken_bike).to receive(:fix!)
-    
-    
-
-    # broken bike should be fixed
+    garage.accept_bikes_from(van)
+    expect(garage.bikes).to eq [broken_bike]
   end
 
 end
