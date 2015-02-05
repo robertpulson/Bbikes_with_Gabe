@@ -5,8 +5,11 @@ class Van
   include BikeContainer
 
   def get_broken_bikes_from(station)
-    station.broken_bikes.each do |broken_bike|
-      self.dock(station.release(broken_bike))
+    station.broken_bikes.each do |bike|
+      station.release(bike)
+      bikes << bike
     end
+
   end
+
 end
