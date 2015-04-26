@@ -1,6 +1,8 @@
+# Define Bike Container Module
 module BikeContainer
-
   DEFAULT_CAPACITY = 10
+
+  attr_writer :capacity
 
   def initialize(options = {})
     self.capacity = options.fetch(:capacity, capacity)
@@ -14,22 +16,18 @@ module BikeContainer
     @capacity ||= DEFAULT_CAPACITY
   end
 
-  def capacity=(value)
-    @capacity = value
-  end
-
   def bike_count
     bikes.count
   end
 
   def dock(bike)
-    raise 'Station is full' if full?
+    fail 'Station is full' if full?
     bikes << bike
   end
 
   def release(bike)
-    raise "#{bike} is not a bike!" if bike.class.to_s != "Bike"
-    raise "#{bike} does not exist!" if bikes.include?(bike) == false
+    fail "#{bike} is not a bike!" unless bike.class.to_s == 'Bike'
+    fail "#{bike} does not exist!" unless bikes.include?(bike)
     bikes.delete(bike)
   end
 
@@ -38,11 +36,10 @@ module BikeContainer
   end
 
   def available_bikes
-    bikes.reject { |bike| bike.broken? }
+    bikes.reject(&:broken?)
   end
 
   def broken_bikes
-    bikes.select { |bike| bike.broken? }
-  end  
-
+    bikes.select(&:broken?)
+  end
 end

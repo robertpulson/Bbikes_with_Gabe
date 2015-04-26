@@ -1,7 +1,7 @@
 require_relative 'bike_container'
 
+# Define Garage Class
 class Garage
-
   include BikeContainer
 
   def fix(bike)
@@ -15,5 +15,4 @@ class Garage
       bike.fix!
     end
   end
-
 end
