@@ -23,7 +23,7 @@ The aim of this exercise was to gain a deeper understanding of OOP, so therefore
 
 # Pair Partner
 
-For this task I paired with Gabriel Arafa. His GitHub profile can be seen here: https://github.com/GabeMaker
+For this task I paired with [Gabriel Arafa](https://github.com/GabeMaker).
 
 # Testing
 
